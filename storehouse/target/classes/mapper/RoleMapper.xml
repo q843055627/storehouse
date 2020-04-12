@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yh.storehouse.mapper.RoleMapper">
+
+    <!-- 根据角色ID删除sys_role_permission -->
+    <delete id="deleteRolePermissionByRid" parameterType="int">
+		DELETE  FROM sys_role_permission WHERE RID = #{value}
+	</delete>
+    <!-- 根据角色ID删除sys_role_user -->
+    <delete id="deleteRoleUserByRid" parameterType="int">
+		DELETE FROM sys_role_user WHERE RID = #{value}
+	</delete>
+
+	<select id="getPermissionByRid" parameterType="int" resultType="int">
+		SELECT pid FROM sys_role_permission WHERE RID = #{value}
+	</select>
+	<insert id="addRolePermission">
+		INSERT INTO sys_role_permission(RID, PID)  VALUES(#{rid},#{pid})
+	</insert>
+
+	<delete id="deleteRoleUserByUid" parameterType="int">
+		DELETE FROM sys_role_user WHERE UID = #{id}
+	</delete>
+
+	<select id="queryRidByUid" parameterType="int" resultType="java.lang.Integer">
+		SELECT RID  FROM sys_role_user WHERE UID = #{uid}
+	</select>
+
+	<insert id="addUserRole">
+		INSERT INTO sys_role_user(RID, UID)  VALUES(#{rid},#{uid})
+	</insert>
+</mapper>
